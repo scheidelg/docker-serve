@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    serve:
+        build: .
+
+        # Port mappings.
+        #
+        # This shouldn't be necesarry for the unit tests, since those tests
+        # occur within the context of the internal Docker environment. But it
+        # could be useful when manually testing, to ensure that the service
+        # is in fact running properly.
+        ports:
+         - "5000:3000/tcp"
+
+    sut:
+        build: ./tests
+        depends_on:
+         - serve
